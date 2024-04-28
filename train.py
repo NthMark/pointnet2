@@ -49,7 +49,7 @@ OPTIMIZER = FLAGS.optimizer
 DECAY_STEP = FLAGS.decay_step
 DECAY_RATE = FLAGS.decay_rate
 
-MODEL = importlib.import_module(FLAGS.model) # import network module
+MODEL = importlib.import_module("models/"+FLAGS.model) # import network module
 MODEL_FILE = os.path.join(ROOT_DIR, 'models', FLAGS.model+'.py')
 LOG_DIR = FLAGS.log_dir
 if not os.path.exists(LOG_DIR): os.mkdir(LOG_DIR)
@@ -130,7 +130,7 @@ def train():
             accuracy = tf.reduce_sum(tf.cast(correct, tf.float32)) / float(BATCH_SIZE)
             tf.summary.scalar('accuracy', accuracy)
 
-            print "--- Get training operator"
+            print ("--- Get training operator")
             # Get training operator
             learning_rate = get_learning_rate(batch)
             tf.summary.scalar('learning_rate', learning_rate)
@@ -280,6 +280,7 @@ def eval_one_epoch(sess, ops, test_writer):
 
 
 if __name__ == "__main__":
-    log_string('pid: %s'%(str(os.getpid())))
-    train()
-    LOG_FOUT.close()
+    print(BASE_DIR)
+    # log_string('pid: %s'%(str(os.getpid())))
+    # train()
+    # LOG_FOUT.close()
